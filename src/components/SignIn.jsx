@@ -51,8 +51,9 @@ export const SignIn = ({ setName }) => {
   const classes = useStyles();
   const [disabled, setDisabled] = useState(true);
   const [string, setString] = useState("");
+  const [isComposed, setIsComposed] = useState(false);
   // const [password, setPassword] = useState("");
-  console.log({ string });
+  // console.log({ disabled, string, isComposed });
 
   useEffect(() => {
     const disabledString = string === "";
@@ -82,11 +83,19 @@ export const SignIn = ({ setName }) => {
               setString(e.target.value);
             }}
             onKeyDown={(e) => {
-              // console.log(e.key);
+              if (isComposed) return;
               if (e.key === "Enter") {
                 setName(e.target.value);
                 e.preventDefault();
               }
+            }}
+            onCompositionStart={() => {
+              setIsComposed(true);
+              console.log("日本語入力が開始されました");
+            }}
+            onCompositionEnd={() => {
+              setIsComposed(false);
+              console.log("日本語入力が終了しました");
             }}
           />
           {/* <TextField
