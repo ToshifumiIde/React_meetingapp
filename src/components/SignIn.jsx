@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -12,11 +12,12 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link 
-        color="inherit" 
+      <Link
+        color="inherit"
         href="https://toshifumiide-portfolio.web.app/"
         target="_blank"
-        rel="noopener"//遷移先からデータの書き換えができない様に処理する
+        rel="noopener"
+        //遷移先からデータの書き換えができない様に処理する
       >
         Toshifumi Ide
       </Link>{" "}
@@ -48,6 +49,16 @@ const useStyles = makeStyles((theme) => ({
 
 export const SignIn = () => {
   const classes = useStyles();
+  const [disabled, setDisabled] = useState(true);
+  const [string, setString] = useState("");
+  const [password , setPassword] = useState("");
+  console.log({ string });
+
+  useEffect(() => {
+    const disabledString = string === "";
+    const disabledPassword = password === "";
+    setDisabled(disabledString || disabledPassword);
+  }, [string , password]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -64,8 +75,12 @@ export const SignIn = () => {
             fullWidth
             id="name"
             label="お名前"
-            name="ename"
+            name="name"
             autoFocus
+            value={string}
+            onChange={(e) => {
+              setString(e.target.value);
+            }}
           />
           <TextField
             variant="outlined"
@@ -77,6 +92,10 @@ export const SignIn = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={e => {
+              setPassword(e.target.value)
+            }}
           />
           <Button
             type="submit"
@@ -84,6 +103,7 @@ export const SignIn = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={disabled}
           >
             はじめる
           </Button>
@@ -94,4 +114,4 @@ export const SignIn = () => {
       </Box>
     </Container>
   );
-}
+};
