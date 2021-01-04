@@ -47,18 +47,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SignIn = ({setName}) => {
+export const SignIn = ({ setName }) => {
   const classes = useStyles();
   const [disabled, setDisabled] = useState(true);
   const [string, setString] = useState("");
-  const [password , setPassword] = useState("");
+  const [password, setPassword] = useState("");
   console.log({ string });
 
   useEffect(() => {
     const disabledString = string === "";
     const disabledPassword = password === "";
     setDisabled(disabledString || disabledPassword);
-  }, [string , password]);
+  }, [string, password]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -93,8 +93,8 @@ export const SignIn = ({setName}) => {
             id="password"
             autoComplete="current-password"
             value={password}
-            onChange={e => {
-              setPassword(e.target.value)
+            onChange={(e) => {
+              setPassword(e.target.value);
             }}
           />
           <Button
@@ -104,8 +104,8 @@ export const SignIn = ({setName}) => {
             color="primary"
             className={classes.submit}
             disabled={disabled}
-            onClick={()=>{
-              setName(string)
+            onClick={() => {
+              setName(string);
             }}
           >
             はじめる
