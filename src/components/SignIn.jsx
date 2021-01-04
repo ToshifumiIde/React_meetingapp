@@ -51,14 +51,14 @@ export const SignIn = ({ setName }) => {
   const classes = useStyles();
   const [disabled, setDisabled] = useState(true);
   const [string, setString] = useState("");
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
   console.log({ string });
 
   useEffect(() => {
     const disabledString = string === "";
-    const disabledPassword = password === "";
-    setDisabled(disabledString || disabledPassword);
-  }, [string, password]);
+    // const disabledPassword = password === "";
+    setDisabled(disabledString);
+  }, [string]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -81,8 +81,15 @@ export const SignIn = ({ setName }) => {
             onChange={(e) => {
               setString(e.target.value);
             }}
+            onKeyDown={(e) => {
+              // console.log(e.key);
+              if (e.key === "Enter") {
+                setName(e.target.value);
+                e.preventDefault();
+              }
+            }}
           />
-          <TextField
+          {/* <TextField
             variant="outlined"
             margin="normal"
             required
@@ -96,7 +103,7 @@ export const SignIn = ({ setName }) => {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-          />
+          /> */}
           <Button
             type="button"
             fullWidth
