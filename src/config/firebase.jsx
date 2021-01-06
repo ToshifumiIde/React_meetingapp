@@ -14,8 +14,8 @@ firebase.initializeApp(firebaseConfig);//firebaseの初期化処理（configの�
 const database = firebase.database();  //初期化したのち、リアルタイムデータベースを「全体・丸ごと」参照して、定数databaseに格納。
 //「全体・丸ごと」参照していた先から、特定の名前空間に対するリファレンス（参照）を作る必要がある。
 //今回はmeetingsという参照先を参照する定数を次の行で作成。
-const meetingRef = database.ref("meetings");
+const meetingsRef = database.ref("meetings");
 
 export const pushMessage = ({ name , text }) => {
-  meetingRef.push({name , text});
+  meetingsRef.push({name , text});
 };

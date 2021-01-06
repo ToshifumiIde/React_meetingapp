@@ -18,13 +18,13 @@ export const MessageInputField = ({name}) => {
   return (
     <div className={classes.root}>
       <Grid container>
-        <Grid xs={1}>
+        <Grid item xs={1}>
           <Avatar src={avatarPath}/>
         </Grid>
-        <Grid xs={10}>
+        <Grid item xs={10}>
           <MessageField text={text} setText={setText} name={name}/>
         </Grid>
-        <Grid xs={1}>
+        <Grid item xs={1}>
           ボタン
         </Grid>
       </Grid>
