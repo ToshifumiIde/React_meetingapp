@@ -25,17 +25,27 @@ export const MessageList = () => {
         if (messagesObj === null) return;
         const entries = Object.entries(messagesObj);
         const newMessages = entries.map((entry) => {
-          return { key: entry[0], ...entry[1] };
+          const [ key , nameAndText ] = entry;
+          return { key, ...nameAndText };
         });
         setMessages(newMessages);
       });
   }, []);
 
+  const length = messages.length;
+
   return (
     <List className={classes.root}>
-      {messages.map(({ key, name, text }) => {
-        return <MessageItem key={key} name={name} text={text} />;
-      })}
+      {messages.map(({ key, name, text } , index) => {
+        const isLastItem = length === index + 1 ;
+        return (
+        <MessageItem 
+          key={key}
+          name={name}
+          text={text} 
+          isLastItem={isLastItem}
+        />
+      )})}
     </List>
   );
 };
